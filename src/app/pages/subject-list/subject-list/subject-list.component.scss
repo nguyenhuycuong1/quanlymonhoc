@@ -1,0 +1,19 @@
+nz-table {
+    height: 77vh;
+    overflow-y: scroll;
+}
+
+button + button {
+    margin-left: 8px;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.seme-select {
+    min-width: 80px;
+}

@@ -1,0 +1,81 @@
+<div>
+  <h1>Thêm mới môn học</h1>
+  <div>
+    <button
+      nz-button
+      nzType="primary"
+      [disabled]="subjectFormArray.length >= 4"
+      (click)="addFormArray()"
+    >
+      Tạo thêm
+    </button>
+  </div>
+  <form
+    nz-form
+    [nzLayout]="'inline'"
+    *ngFor="let subjectGroup of subjectFormArray; let i = index"
+  >
+    <ng-container [formGroup]="subjectGroup">
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="getErrorMsg('subjectCode', i)">
+          <nz-input-group>
+            <input
+              formControlName="subjectCode"
+              nz-input
+              placeholder="Mã môn"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="getErrorMsg('subjectName', i)">
+          <nz-input-group>
+            <input
+              formControlName="subjectName"
+              nz-input
+              placeholder="Tên môn"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="getErrorMsg('credit', i)">
+          <nz-input-group>
+            <input formControlName="credit" nz-input placeholder="Tín chỉ" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="getErrorMsg('coe', i)">
+          <nz-input-group>
+            <input formControlName="coe" nz-input placeholder="Hệ số" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group>
+            <nz-select formControlName="semeCode" ngModel="k1">
+              <nz-option nzValue="k1" nzLabel="Kỳ 1"></nz-option>
+              <nz-option nzValue="k2" nzLabel="Kỳ 2"></nz-option>
+              <nz-option nzValue="k3" nzLabel="Kỳ 3"></nz-option>
+            </nz-select>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </ng-container>
+  </form>
+  <nz-form-item>
+    <nz-form-control>
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="!subjectForm.valid"
+        type="submit"
+        (click)="submitForm()"
+      >
+        Thêm
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</div>

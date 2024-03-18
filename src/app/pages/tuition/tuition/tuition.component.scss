@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+nz-select {
+    min-width: 80px;
+    margin-bottom: 24px;
+}
+
+nz-table {
+    max-height: 53vh;
+    overflow-y: auto;
+}
+
+.subjectname-item {
+    color: #001529;
+    transition: color 0.1s linear;
+    &:hover {
+        color: #1890FF;
+    }
+    cursor: pointer;
+}
+.total {
+    margin-top: auto;
+}

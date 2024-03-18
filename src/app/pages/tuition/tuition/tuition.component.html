@@ -1,0 +1,53 @@
+<div class="wrapper">
+  <div>
+    Kỳ học:
+    <nz-select
+      [(ngModel)]="semeId"
+      (ngModelChange)="getSubjectName(semeId); getRegisteredList(semeId)"
+    >
+      <nz-option nzValue="k1" nzLabel="Kỳ 1"></nz-option>
+      <nz-option nzValue="k2" nzLabel="Kỳ 2"></nz-option>
+      <nz-option nzValue="k3" nzLabel="Kỳ 3"></nz-option>
+    </nz-select>
+  </div>
+  <h2>Danh sách môn</h2>
+  <div nz-row class="subjet-list">
+    <div *ngFor="let item of subjectList" nz-col nzSpan="8">
+      <span
+        class="subjectname-item"
+        (click)="addOrRemoveItem(item.subjectCode)"
+        >{{ item.subjectName }}</span
+      >
+    </div>
+  </div>
+  <nz-table nzTemplateMode>
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Mã môn</th>
+        <th>Tên môn</th>
+        <th>Tín chỉ</th>
+        <th>Hệ số</th>
+        <th>Học phí (VND)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of registeredList; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.subCode }}</td>
+        <td>{{ item.Subject.subjectName }}</td>
+        <td>{{ item.Subject.credit }}</td>
+        <td>{{ item.Subject.coe }}</td>
+        <td>
+          {{
+            item.Subject.credit * item.Subject.coe * charge
+              | currency : "VND" : " "
+          }}
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <h2 *ngIf="semeId !== null" class="total">
+    Tổng học phí: {{ totalFees | currency : "VND" : " " }} VND
+  </h2>
+</div>

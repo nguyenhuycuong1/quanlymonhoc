@@ -1,0 +1,76 @@
+<div>
+  <div class="control">
+    <div>
+      Kỳ học:
+      <nz-select
+        class="seme-select"
+        [(ngModel)]="semeId"
+        (ngModelChange)="getListSubject(semeId)"
+      >
+        <nz-option nzValue="all" nzLabel="Tất cả"></nz-option>
+        <nz-option nzValue="k1" nzLabel="Kỳ 1"></nz-option>
+        <nz-option nzValue="k2" nzLabel="Kỳ 2"></nz-option>
+        <nz-option nzValue="k3" nzLabel="Kỳ 3"></nz-option>
+      </nz-select>
+    </div>
+    <button
+      nz-button
+      nzType="primary"
+      (click)="navigateTo('/subject-list/new-subject')"
+    >
+      Thêm môn học
+    </button>
+  </div>
+  <nz-table nzTemplateMode>
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Mã môn</th>
+        <th>Tên môn</th>
+        <th>Tín chỉ</th>
+        <th>Hế số</th>
+        <th>Tùy chọn</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subject of subjects; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ subject.subjectCode }}</td>
+
+        <ng-container
+          *ngIf="editingSubejct !== subject; else editMode"
+          style="display: contents"
+        >
+          <td>{{ subject.subjectName }}</td>
+          <td>{{ subject.credit }}</td>
+          <td>{{ subject.coe }}</td>
+        </ng-container>
+        <ng-template #editMode>
+          <td>
+            <input nz-input type="text" [(ngModel)]="subject.subjectName" />
+          </td>
+          <td><input nz-input type="text" [(ngModel)]="subject.credit" /></td>
+          <td><input nz-input type="text" [(ngModel)]="subject.coe" /></td>
+        </ng-template>
+
+        <td>
+          <button
+            nz-button
+            nzType="default"
+            (click)="editingSubejct ? saveSubject() : editSubject(subject)"
+          >
+            {{ subject === editingSubejct ? "Lưu" : "Sửa" }}
+          </button>
+          <button
+            nz-button
+            nzType="default"
+            nzDanger
+            (click)="showConfirmDelete(subject.subjectCode)"
+          >
+            Xóa
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
